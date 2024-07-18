@@ -23,12 +23,10 @@ public class UserResponse {
     private Integer id;
 
     private String telephone;
+    private String username;
 
-    @JsonProperty("first_name")
-    private String firstName;
-
-    @JsonProperty("last_name")
-    private String lastName;
+    @JsonProperty("full_name")
+    private String fullName;
 
     @JsonProperty("address")
     private UserAddress address;
@@ -51,12 +49,12 @@ public class UserResponse {
         return UserResponse.builder()
                 .id(user.getId())
                 .telephone(user.getTelephone())
+                .username(user.getUsername())
                 .profileImage(user.getProfileImage())
                 .roles(user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()))
                 .email(user.getEmail())
                 .address(user.getAddress())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
+                .fullName(user.getFullName())
                 .build();
     }
 }
