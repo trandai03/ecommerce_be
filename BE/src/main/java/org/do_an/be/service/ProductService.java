@@ -47,6 +47,7 @@ public class ProductService {
                 .sku(productDTO.getSku())
                 .inventory(productDTO.getInventory())
                 .category(existingCategory)
+                .discount(productDTO.getDiscount())
                 .build();
         return productRepository.save(newProduct);
     }
@@ -107,7 +108,10 @@ public class ProductService {
             if(productDTO.getInventory() >= 0) {
                 existingProduct.setInventory(productDTO.getInventory());
             }
-            if(productDetailDTO.getRam()!=null){
+            if(productDTO.getDiscount() >= 0) {
+                existingProduct.setDiscount(productDTO.getDiscount());
+            }
+            if(productDetailDTO!=null){
                 productDetailService.updateProductDetail(id,productDetailDTO);
             }
             return productRepository.save(existingProduct);
