@@ -76,8 +76,8 @@ public class ProductService {
     @Transactional
     public Product updateProduct(
             Integer id,
-            ProductDTO productDTO,
-            ProductDetailDTO productDetailDTO
+            ProductDTO productDTO
+//            , ProductDetailDTO productDetailDTO
     )
             throws Exception {
         Product existingProduct = getProductById(id);
@@ -111,9 +111,9 @@ public class ProductService {
             if(productDTO.getDiscount() >= 0) {
                 existingProduct.setDiscount(productDTO.getDiscount());
             }
-            if(productDetailDTO!=null){
-                productDetailService.updateProductDetail(id,productDetailDTO);
-            }
+//            if(productDetailDTO!=null){
+//                productDetailService.updateProductDetail(id,productDetailDTO);
+//            }
             return productRepository.save(existingProduct);
         }
         return null;
