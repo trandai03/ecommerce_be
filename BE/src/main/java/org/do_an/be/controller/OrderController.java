@@ -128,4 +128,16 @@ public class OrderController {
         Order order = orderService.updateOrderStatus(id,status);
         return ResponseEntity.ok(new ResponseObject("Update order status successfully", HttpStatus.OK, order));
     }
+
+    @DeleteMapping("/{id}")
+
+    //PUT http://localhost:8088/api/v1/orders/2
+    //công việc của admin
+    public ResponseEntity<ResponseObject> deleteOrder(
+            @Valid @PathVariable Integer id
+           ) throws Exception {
+
+        orderService.deleteOrder(id);
+        return ResponseEntity.ok(new ResponseObject("Update order successfully", HttpStatus.OK,null));
+    }
 }
