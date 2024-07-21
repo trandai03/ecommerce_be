@@ -2,6 +2,7 @@ package org.do_an.be.responses.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.do_an.be.entity.Order;
 import org.do_an.be.entity.Role;
 import org.do_an.be.entity.User;
 import org.do_an.be.entity.UserAddress;
@@ -9,6 +10,7 @@ import org.do_an.be.repository.RoleRepository;
 import org.do_an.be.repository.UserRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,6 +41,7 @@ public class UserResponse {
 
     @JsonProperty("roles")
     private Set<String> roles;
+    private List<Order> orders;
     public static UserResponse fromUser(User user) {
 
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
@@ -55,6 +58,7 @@ public class UserResponse {
                 .email(user.getEmail())
                 .address(user.getAddress())
                 .fullName(user.getFullName())
+
                 .build();
     }
 }

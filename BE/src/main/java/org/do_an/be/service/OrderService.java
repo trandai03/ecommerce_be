@@ -199,6 +199,12 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    public Order updateOrderStatus(Integer id, String status) throws DataNotFoundException{
+        Order order = orderRepository.findById(id).orElseThrow(() ->
+                new DataNotFoundException("Cannot find order with id: " + id));
+        order.setStatus(status);
+        return orderRepository.save(order);
+    }
     @Transactional
     public void deleteOrder(Integer orderId) {
         Order order = orderRepository.findById(orderId).orElse(null);
@@ -214,7 +220,10 @@ public class OrderService {
         return orders.stream().map(order -> OrderResponse.fromOrder(order)).toList();
     }
 
-
+    public List<OrderResponse> getAllOrders(Long userId) {
+        List<Order> orders = orderRepository.findAll();
+        return orders.stream().map(order -> OrderResponse.fromOrder(order)).toList();
+    }
     public Page<Order> getOrdersByKeyword(String keyword, Pageable pageable) {
         return orderRepository.findByKeyword(keyword, pageable);
     }
