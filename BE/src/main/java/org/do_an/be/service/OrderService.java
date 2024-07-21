@@ -70,6 +70,13 @@ public class OrderService {
             Product product = productRepository.findById(productId)
                     .orElseThrow(() -> new DataNotFoundException("Product not found with id: " + productId));
             // Đặt thông tin cho OrderDetail
+            if (product.getInventory() >= quantity) {
+                product.setInventory(product.getInventory() - quantity);
+                productRepository.save(product);
+
+            } else {
+                throw new RuntimeException("Không đủ số lượng " + product.getName() + " trong kho để đáp ứng đơn hàng.");
+            }
             orderDetail.setProduct(product);
             orderDetail.setNumberOfProducts(quantity);
             // Các trường khác của OrderDetail nếu cần

@@ -138,6 +138,6 @@ public class OrderController {
            ) throws Exception {
 
         orderService.deleteOrder(id);
-        return ResponseEntity.ok(new ResponseObject("Update order successfully", HttpStatus.OK,null));
+        return ResponseEntity.ok(new ResponseObject("Delete order successfully", HttpStatus.OK,null));
     }
 }
